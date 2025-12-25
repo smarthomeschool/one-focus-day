@@ -35,13 +35,19 @@
 
     h2 {
       font-size: 22px;
-      margin-top: 36px;
+      margin-top: 34px;
       margin-bottom: 8px;
     }
 
     p {
       margin-bottom: 14px;
       color: #374151;
+    }
+
+    .divider {
+      margin: 28px 0;
+      height: 1px;
+      background: #e5e7eb;
     }
 
     textarea {
@@ -55,6 +61,12 @@
       box-sizing: border-box;
       margin-top: 8px;
       background: #f9fafb;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: rgba(47,111,94,0.45);
+      box-shadow: 0 0 0 4px rgba(47,111,94,0.10);
     }
 
     textarea::placeholder {
@@ -67,18 +79,73 @@
       margin-top: 6px;
     }
 
-    .divider {
-      margin: 36px 0;
-      height: 1px;
-      background: #e5e7eb;
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #2f6f5e;
+      color: white;
+      font-weight: 650;
+    }
+
+    .btn:active { transform: translateY(1px); }
+
+    .btn.secondary {
+      background: #e8f3ee;
+      color: #1f2937;
+      border: 1px solid rgba(47,111,94,0.25);
+      font-weight: 600;
+    }
+
+    .reassurance {
+      display: none;
+      margin-top: 14px;
+      padding: 16px 16px;
+      border-radius: 16px;
+      background: #f2faf6;
+      border: 1px solid rgba(47,111,94,0.18);
+      color: #0f172a;
+      white-space: pre-line;
+    }
+
+    .reassurance strong {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .step {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .step.active {
+      display: block;
     }
 
     .closing {
+      display: none;
       background: #f2faf6;
       border-radius: 16px;
       padding: 20px;
-      margin-top: 40px;
+      margin-top: 34px;
       border: 1px solid rgba(47,111,94,0.18);
+    }
+
+    .tiny {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 8px;
     }
   </style>
 </head>
@@ -87,6 +154,7 @@
   <div class="container">
     <div class="card">
 
+      <!-- ARRIVE -->
       <h1>The One-Focus Day</h1>
       <p>
         This isn’t about fixing your whole day.<br>
@@ -99,45 +167,216 @@
 
       <div class="divider"></div>
 
-      <h2>What feels heavy or noisy right now?</h2>
-      <p>
-        You don’t need to solve it.<br>
-        Just let it land somewhere other than your head.
-      </p>
-      <textarea placeholder="I keep thinking about..."></textarea>
-      <div class="note">This is just for you. Nothing is saved.</div>
-
-      <div class="divider"></div>
-
-      <h2>If only one thing mattered today, what would it be?</h2>
-      <p>
-        Not everything.<br>
-        Not the ideal day.<br>
-        Just one thing that would make tonight feel lighter.
-      </p>
-      <textarea placeholder="Today, the one thing that matters is..."></textarea>
-
-      <div class="divider"></div>
-
-      <h2>When can you say this is “done enough”?</h2>
-      <p>
-        Perfection is not the goal.<br>
-        Clarity is.
-      </p>
-      <textarea placeholder="This is done when..."></textarea>
-
-      <div class="closing">
+      <!-- STEP 2 -->
+      <section id="step2" class="step active">
+        <h2>What feels heavy or noisy right now?</h2>
         <p>
-          If this one thing gets done today, that is enough.
+          You don’t need to solve it.<br>
+          Just let it land somewhere other than your head.
         </p>
+
+        <textarea id="t2" placeholder="I keep thinking about..."></textarea>
+        <div class="note">This is just for you. Nothing is saved.</div>
+
+        <div class="actions">
+          <button id="b2" class="btn">Continue</button>
+          <button id="c2" class="btn secondary" type="button">Clear</button>
+          <span class="tiny">Tip: Press Shift+Enter for a new line.</span>
+        </div>
+
+        <div id="r2" class="reassurance"></div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- STEP 3 -->
+      <section id="step3" class="step">
+        <h2>If only one thing mattered today, what would it be?</h2>
+        <p>
+          Not everything.<br>
+          Not the ideal day.<br>
+          Just one thing that would make tonight feel lighter.
+        </p>
+
+        <textarea id="t3" placeholder="Today, the one thing that matters is..."></textarea>
+
+        <div class="actions">
+          <button id="b3" class="btn">Continue</button>
+          <button id="c3" class="btn secondary" type="button">Clear</button>
+          <span class="tiny">Tip: Press Shift+Enter for a new line.</span>
+        </div>
+
+        <div id="r3" class="reassurance"></div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- STEP 4 -->
+      <section id="step4" class="step">
+        <h2>When can you say this is “done enough”?</h2>
+        <p>
+          Perfection is not the goal.<br>
+          Clarity is.
+        </p>
+
+        <textarea id="t4" placeholder="This is done when..."></textarea>
+
+        <div class="actions">
+          <button id="b4" class="btn">Finish</button>
+          <button id="c4" class="btn secondary" type="button">Clear</button>
+          <span class="tiny">Tip: Press Shift+Enter for a new line.</span>
+        </div>
+
+        <div id="r4" class="reassurance"></div>
+      </section>
+
+      <!-- CLOSING -->
+      <div id="closing" class="closing">
+        <p><strong>If this one thing gets done today, that is enough.</strong></p>
         <p>
           You don’t need to earn rest.<br>
           You’re allowed to stop when this is complete.
         </p>
+        <p class="tiny">Bookmark this page for days when everything feels like too much.</p>
       </div>
 
     </div>
   </div>
+
+  <script>
+    // --- Steady reassurance banks (5 each) ---
+    const responsesStep2 = [
+`That’s enough for now.
+You don’t need to untangle it or make sense of it today.`,
+
+`Thank you for letting that out.
+You’re allowed to carry less in this moment.`,
+
+`You’ve named it — and that matters.
+Nothing else needs to happen with this right now.`,
+
+`It’s okay to set this down here.
+You can come back to it another time, if you need to.`,
+
+`You didn’t need to be clear or articulate.
+Just acknowledging it is already enough.`
+    ];
+
+    const responsesStep3 = [
+`One thing is plenty for today.
+You don’t need to justify this choice.`,
+
+`This is a valid focus.
+You’re allowed to let the rest wait.`,
+
+`Choosing one thing is not giving up —
+it’s choosing where your energy belongs.`,
+
+`You don’t need a perfect priority.
+You just need one that feels true.`,
+
+`This is enough to anchor the day.
+Everything else can stay optional.`
+    ];
+
+    const responsesStep4 = [
+`You’ve just given yourself a stopping point.
+That’s an act of care.`,
+
+`Knowing when to stop matters more than doing more.
+You’re allowed to honour this boundary.`,
+
+`This definition is enough.
+You don’t need to stretch it or improve it.`,
+
+`You now know when you can rest.
+That’s not laziness — that’s wisdom.`,
+
+`When this is done, you are done.
+You don’t need to keep proving anything.`
+    ];
+
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function showReassurance(el, text) {
+      el.style.display = 'block';
+      el.innerHTML = `<strong>Steady reminder:</strong>\n${text}`;
+    }
+
+    function unlockStep(stepEl) {
+      stepEl.classList.add('active');
+      stepEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function hasMeaningfulText(text) {
+      return (text || '').trim().length >= 2;
+    }
+
+    // Elements
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    const step4 = document.getElementById('step4');
+    const closing = document.getElementById('closing');
+
+    const t2 = document.getElementById('t2');
+    const t3 = document.getElementById('t3');
+    const t4 = document.getElementById('t4');
+
+    const r2 = document.getElementById('r2');
+    const r3 = document.getElementById('r3');
+    const r4 = document.getElementById('r4');
+
+    const b2 = document.getElementById('b2');
+    const b3 = document.getElementById('b3');
+    const b4 = document.getElementById('b4');
+
+    const c2 = document.getElementById('c2');
+    const c3 = document.getElementById('c3');
+    const c4 = document.getElementById('c4');
+
+    // Clear buttons
+    c2.addEventListener('click', () => { t2.value = ''; t2.focus(); });
+    c3.addEventListener('click', () => { t3.value = ''; t3.focus(); });
+    c4.addEventListener('click', () => { t4.value = ''; t4.focus(); });
+
+    // Continue handlers (button is primary)
+    b2.addEventListener('click', () => {
+      // allow empty, but gently nudge by still giving reassurance
+      showReassurance(r2, pick(responsesStep2));
+      unlockStep(step3);
+    });
+
+    b3.addEventListener('click', () => {
+      showReassurance(r3, pick(responsesStep3));
+      unlockStep(step4);
+    });
+
+    b4.addEventListener('click', () => {
+      showReassurance(r4, pick(responsesStep4));
+      closing.style.display = 'block';
+      closing.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Enter-to-continue (with Shift+Enter for newline)
+    function bindEnter(textarea, button) {
+      textarea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          button.click();
+        }
+      });
+    }
+
+    bindEnter(t2, b2);
+    bindEnter(t3, b3);
+    bindEnter(t4, b4);
+
+    // Optional: If you want to require at least 2 characters before continuing,
+    // uncomment the check below in each click handler.
+    // (I kept it gentle and permissive by default.)
+  </script>
 </body>
 </html>
 
