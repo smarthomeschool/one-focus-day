@@ -1,382 +1,460 @@
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The One-Focus Day</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #faf7f2;
-      color: #1f2937;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       margin: 0;
       padding: 0;
-      line-height: 1.6;
+      background: #faf7f2;
+      color: #1f2937;
+      line-height: 1.55;
     }
 
-    .container {
-      max-width: 720px;
+    .wrap {
+      max-width: 760px;
       margin: 0 auto;
       padding: 48px 20px;
     }
 
     .card {
       background: #ffffff;
-      border-radius: 20px;
-      padding: 32px;
+      border-radius: 18px;
+      padding: 28px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
 
     h1 {
       font-size: 28px;
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-size: 22px;
-      margin-top: 34px;
-      margin-bottom: 8px;
+      margin: 0 0 10px 0;
     }
 
     p {
-      margin-bottom: 14px;
+      margin: 0 0 16px 0;
       color: #374151;
-    }
-
-    .divider {
-      margin: 28px 0;
-      height: 1px;
-      background: #e5e7eb;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 120px;
-      padding: 14px;
       font-size: 16px;
-      border-radius: 14px;
-      border: 1px solid #d1d5db;
-      resize: vertical;
-      box-sizing: border-box;
-      margin-top: 8px;
-      background: #f9fafb;
-      outline: none;
     }
 
-    textarea:focus {
-      border-color: rgba(47,111,94,0.45);
-      box-shadow: 0 0 0 4px rgba(47,111,94,0.10);
-    }
-
-    textarea::placeholder {
-      color: #9ca3af;
-    }
-
-    .note {
+    .subtle {
       font-size: 14px;
       color: #6b7280;
-      margin-top: 6px;
+      margin-top: -6px;
     }
 
-    .actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-top: 12px;
-      flex-wrap: wrap;
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    @media (min-width: 720px) {
+      .choices {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     .btn {
-      border: 0;
-      padding: 12px 16px;
+      border: 1px solid rgba(47,111,94,0.20);
+      background: #ffffff;
+      padding: 14px;
       border-radius: 14px;
+      cursor: pointer;
+      text-align: left;
       font-size: 16px;
+      color: #111827;
+    }
+
+    .btnPrimary {
+      border: 0;
+      padding: 14px 16px;
+      border-radius: 14px;
       cursor: pointer;
       background: #2f6f5e;
       color: white;
       font-weight: 650;
+      font-size: 16px;
+      width: 100%;
     }
 
-    .btn:active { transform: translateY(1px); }
-
-    .btn.secondary {
-      background: #e8f3ee;
-      color: #1f2937;
-      border: 1px solid rgba(47,111,94,0.25);
-      font-weight: 600;
-    }
-
-    .reassurance {
+    .output {
       display: none;
-      margin-top: 14px;
-      padding: 16px 16px;
+      margin-top: 22px;
+      padding: 18px;
       border-radius: 16px;
       background: #f2faf6;
       border: 1px solid rgba(47,111,94,0.18);
       color: #0f172a;
-      white-space: pre-line;
     }
 
-    .reassurance strong {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    .step {
-      display: none;
-      margin-top: 18px;
-    }
-
-    .step.active {
-      display: block;
-    }
-
-    .closing {
-      display: none;
-      background: #f2faf6;
-      border-radius: 16px;
-      padding: 20px;
-      margin-top: 34px;
-      border: 1px solid rgba(47,111,94,0.18);
-    }
-
-    .tiny {
+    .label {
       font-size: 13px;
       color: #6b7280;
-      margin-top: 8px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    ul {
+      margin: 0 0 0 18px;
+      padding: 0;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(17,24,39,0.10);
+      margin: 18px 0;
+    }
+
+    .footerTip {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #6b7280;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="wrap">
     <div class="card">
 
-      <!-- ARRIVE -->
       <h1>The One-Focus Day</h1>
-      <p>
-        This isn’t about fixing your whole day.<br>
-        It’s about choosing one thing that helps today feel lighter.
-      </p>
-      <p>
-        You don’t need to rush.<br>
-        Nothing else matters while you’re here.
-      </p>
+      <p>Choose what kind of day you’re having. I’ll help you decide one calm focus for home and homeschool.</p>
+      <p class="subtle">No typing. No saving. Just a steady next step.</p>
 
-      <div class="divider"></div>
+      <div class="choices" id="choices">
+        <button class="btn" data-type="overwhelmed">Everything feels overwhelming</button>
+        <button class="btn" data-type="behind">We’re behind and I feel the pressure</button>
+        <button class="btn" data-type="lowenergy">Energy is low today</button>
+        <button class="btn" data-type="distracted">We’re distracted and scattered</button>
+        <button class="btn" data-type="win">We need a win today</button>
+        <button class="btn" data-type="house">The house needs a reset</button>
+      </div>
 
-      <!-- STEP 2 -->
-      <section id="step2" class="step active">
-        <h2>What feels heavy or noisy right now?</h2>
-        <p>
-          You don’t need to solve it.<br>
-          Just let it land somewhere other than your head.
-        </p>
+      <div class="output" id="output">
+        <div class="label">Steady reminder</div>
+        <div id="outReminder"></div>
 
-        <textarea id="t2" placeholder="I keep thinking about..."></textarea>
-        <div class="note">This is just for you. Nothing is saved.</div>
+        <div class="divider"></div>
 
-        <div class="actions">
-          <button id="b2" class="btn">Continue</button>
-          <button id="c2" class="btn secondary" type="button">Clear</button>
-          <span class="tiny">Tip: Press Shift+Enter for a new line.</span>
+        <div class="label">Today’s one focus</div>
+        <div id="outFocus"></div>
+
+        <div class="divider"></div>
+
+        <div class="label">Three tiny steps</div>
+        <ul id="outSteps"></ul>
+
+        <div class="divider"></div>
+
+        <div class="label">Done enough</div>
+        <div id="outDone"></div>
+
+        <div class="divider"></div>
+
+        <div class="label">Optional swap</div>
+        <div id="outSwap"></div>
+
+        <div style="margin-top:18px;">
+          <button class="btnPrimary" id="tryAnother">Give me another option</button>
         </div>
 
-        <div id="r2" class="reassurance"></div>
-      </section>
-
-      <div class="divider"></div>
-
-      <!-- STEP 3 -->
-      <section id="step3" class="step">
-        <h2>If only one thing mattered today, what would it be?</h2>
-        <p>
-          Not everything.<br>
-          Not the ideal day.<br>
-          Just one thing that would make tonight feel lighter.
-        </p>
-
-        <textarea id="t3" placeholder="Today, the one thing that matters is..."></textarea>
-
-        <div class="actions">
-          <button id="b3" class="btn">Continue</button>
-          <button id="c3" class="btn secondary" type="button">Clear</button>
-          <span class="tiny">Tip: Press Shift+Enter for a new line.</span>
-        </div>
-
-        <div id="r3" class="reassurance"></div>
-      </section>
-
-      <div class="divider"></div>
-
-      <!-- STEP 4 -->
-      <section id="step4" class="step">
-        <h2>When can you say this is “done enough”?</h2>
-        <p>
-          Perfection is not the goal.<br>
-          Clarity is.
-        </p>
-
-        <textarea id="t4" placeholder="This is done when..."></textarea>
-
-        <div class="actions">
-          <button id="b4" class="btn">Finish</button>
-          <button id="c4" class="btn secondary" type="button">Clear</button>
-          <span class="tiny">Tip: Press Shift+Enter for a new line.</span>
-        </div>
-
-        <div id="r4" class="reassurance"></div>
-      </section>
-
-      <!-- CLOSING -->
-      <div id="closing" class="closing">
-        <p><strong>If this one thing gets done today, that is enough.</strong></p>
-        <p>
-          You don’t need to earn rest.<br>
-          You’re allowed to stop when this is complete.
-        </p>
-        <p class="tiny">Bookmark this page for days when everything feels like too much.</p>
+        <div class="footerTip">Bookmark this page for days when you need a calm next step.</div>
       </div>
 
     </div>
   </div>
 
   <script>
-    // --- Steady reassurance banks (5 each) ---
-    const responsesStep2 = [
-`That’s enough for now.
-You don’t need to untangle it or make sense of it today.`,
-
-`Thank you for letting that out.
-You’re allowed to carry less in this moment.`,
-
-`You’ve named it — and that matters.
-Nothing else needs to happen with this right now.`,
-
-`It’s okay to set this down here.
-You can come back to it another time, if you need to.`,
-
-`You didn’t need to be clear or articulate.
-Just acknowledging it is already enough.`
-    ];
-
-    const responsesStep3 = [
-`One thing is plenty for today.
-You don’t need to justify this choice.`,
-
-`This is a valid focus.
-You’re allowed to let the rest wait.`,
-
-`Choosing one thing is not giving up —
-it’s choosing where your energy belongs.`,
-
-`You don’t need a perfect priority.
-You just need one that feels true.`,
-
-`This is enough to anchor the day.
-Everything else can stay optional.`
-    ];
-
-    const responsesStep4 = [
-`You’ve just given yourself a stopping point.
-That’s an act of care.`,
-
-`Knowing when to stop matters more than doing more.
-You’re allowed to honour this boundary.`,
-
-`This definition is enough.
-You don’t need to stretch it or improve it.`,
-
-`You now know when you can rest.
-That’s not laziness — that’s wisdom.`,
-
-`When this is done, you are done.
-You don’t need to keep proving anything.`
-    ];
-
-    function pick(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
-    }
-
-    function showReassurance(el, text) {
-      el.style.display = 'block';
-      el.innerHTML = `<strong>Steady reminder:</strong>\n${text}`;
-    }
-
-    function unlockStep(stepEl) {
-      stepEl.classList.add('active');
-      stepEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function hasMeaningfulText(text) {
-      return (text || '').trim().length >= 2;
-    }
-
-    // Elements
-    const step2 = document.getElementById('step2');
-    const step3 = document.getElementById('step3');
-    const step4 = document.getElementById('step4');
-    const closing = document.getElementById('closing');
-
-    const t2 = document.getElementById('t2');
-    const t3 = document.getElementById('t3');
-    const t4 = document.getElementById('t4');
-
-    const r2 = document.getElementById('r2');
-    const r3 = document.getElementById('r3');
-    const r4 = document.getElementById('r4');
-
-    const b2 = document.getElementById('b2');
-    const b3 = document.getElementById('b3');
-    const b4 = document.getElementById('b4');
-
-    const c2 = document.getElementById('c2');
-    const c3 = document.getElementById('c3');
-    const c4 = document.getElementById('c4');
-
-    // Clear buttons
-    c2.addEventListener('click', () => { t2.value = ''; t2.focus(); });
-    c3.addEventListener('click', () => { t3.value = ''; t3.focus(); });
-    c4.addEventListener('click', () => { t4.value = ''; t4.focus(); });
-
-    // Continue handlers (button is primary)
-    b2.addEventListener('click', () => {
-      // allow empty, but gently nudge by still giving reassurance
-      showReassurance(r2, pick(responsesStep2));
-      unlockStep(step3);
-    });
-
-    b3.addEventListener('click', () => {
-      showReassurance(r3, pick(responsesStep3));
-      unlockStep(step4);
-    });
-
-    b4.addEventListener('click', () => {
-      showReassurance(r4, pick(responsesStep4));
-      closing.style.display = 'block';
-      closing.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-
-    // Enter-to-continue (with Shift+Enter for newline)
-    function bindEnter(textarea, button) {
-      textarea.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault();
-          button.click();
+    const packs = {
+      overwhelmed: [
+        {
+          reminder: "Days like this don’t need fixing — they need softening.",
+          focus: "Stabilise the home and keep homeschool light.",
+          steps: ["Put one load of laundry on", "Read aloud for 10 minutes", "One basic subject or life skill"],
+          done: "If everyone has eaten and one learning moment happened, today counts.",
+          swap: "If even this feels heavy, choose connection instead."
+        },
+        {
+          reminder: "Overwhelm is information overload, not failure.",
+          focus: "Reduce inputs and lower expectations.",
+          steps: ["Turn off background noise", "Choose one calm activity", "Sit together while it happens"],
+          done: "When the house feels calmer, you’re done.",
+          swap: "If focus is impossible, switch to a quiet reset."
+        },
+        {
+          reminder: "You’re allowed to simplify without explaining.",
+          focus: "Keep everyone regulated.",
+          steps: ["Snack + water", "One shared activity", "One small tidy"],
+          done: "When moods settle, the day has done its job.",
+          swap: "If regulation feels hard, pause together."
+        },
+        {
+          reminder: "This is a hold-steady day.",
+          focus: "Contain the day.",
+          steps: ["Stay in one room", "Choose one task", "End early"],
+          done: "If nothing escalates, you succeeded.",
+          swap: "End early on purpose."
+        },
+        {
+          reminder: "Nothing about today defines your homeschool.",
+          focus: "Protect energy.",
+          steps: ["Repeat a familiar routine", "Easy win task", "Let go of the rest"],
+          done: "When the day feels manageable again, stop.",
+          swap: "Move into rest or free play."
         }
-      });
+      ],
+
+      behind: [
+        {
+          reminder: "Being behind is a feeling, not a fact.",
+          focus: "One core subject only.",
+          steps: ["Choose one subject", "Work 20 minutes", "Stop"],
+          done: "One subject done is enough.",
+          swap: "Shorten time if pressure rises."
+        },
+        {
+          reminder: "Pressure doesn’t improve learning.",
+          focus: "Review instead of new work.",
+          steps: ["Oral work", "Gentle pace", "Encouragement"],
+          done: "Stress-free learning counts.",
+          swap: "Switch to discussion only."
+        },
+        {
+          reminder: "You don’t need to catch up today.",
+          focus: "Stabilise rhythm.",
+          steps: ["Start on time", "Predictable task", "End positive"],
+          done: "Rhythm restored = enough.",
+          swap: "Pause homeschool if needed."
+        },
+        {
+          reminder: "Your homeschool isn’t measured by speed.",
+          focus: "Consistency over intensity.",
+          steps: ["Short lesson", "Gentle effort", "Early finish"],
+          done: "Effort given = done.",
+          swap: "Stop sooner if frustration rises."
+        },
+        {
+          reminder: "Lowering expectations is wisdom.",
+          focus: "Light day on purpose.",
+          steps: ["Easiest subject", "Keep it light", "Celebrate completion"],
+          done: "When everyone feels lighter, stop.",
+          swap: "Choose rest instead."
+        }
+      ],
+
+      lowenergy: [
+        {
+          reminder: "Low energy days still count.",
+          focus: "Work with energy.",
+          steps: ["Slow start", "Hands-on task", "Breaks"],
+          done: "When energy stabilises, stop.",
+          swap: "Rest together."
+        },
+        {
+          reminder: "You’re allowed to slow everything down.",
+          focus: "Preserve energy.",
+          steps: ["Seated school", "Calm activity", "Early finish"],
+          done: "Energy preserved = enough.",
+          swap: "Cancel the rest."
+        },
+        {
+          reminder: "Learning doesn’t require high energy.",
+          focus: "Gentle exposure.",
+          steps: ["Audiobook", "Short video", "Talk together"],
+          done: "Curiosity flicker = done.",
+          swap: "Let it go."
+        },
+        {
+          reminder: "Today isn’t asking for output.",
+          focus: "Restorative rhythm.",
+          steps: ["Quiet play", "Simple food", "Calm space"],
+          done: "When everyone feels steadier, stop.",
+          swap: "Switch to outdoors."
+        },
+        {
+          reminder: "Care comes first.",
+          focus: "Meet basic needs.",
+          steps: ["Hydration", "Comfort", "One small task"],
+          done: "Needs met = day complete.",
+          swap: "Pause everything else."
+        }
+      ],
+
+      distracted: [
+        {
+          reminder: "Distraction often signals unmet needs.",
+          focus: "Contain attention.",
+          steps: ["One location", "One task", "Time limit"],
+          done: "Focus improves = enough.",
+          swap: "Shift activities."
+        },
+        {
+          reminder: "Structure beats pressure.",
+          focus: "Reduce choices.",
+          steps: ["Decide for them", "Start together", "End together"],
+          done: "Cooperation improves = stop.",
+          swap: "Reset expectations."
+        },
+        {
+          reminder: "Attention follows safety.",
+          focus: "Ground first.",
+          steps: ["Snack", "Movement", "Calm task"],
+          done: "Bodies settle = done.",
+          swap: "Continue movement."
+        },
+        {
+          reminder: "This is dysregulation, not defiance.",
+          focus: "Regulate before teaching.",
+          steps: ["Breathing", "Sit together", "Short lesson"],
+          done: "Calm returns = enough.",
+          swap: "Pause learning."
+        },
+        {
+          reminder: "Fewer inputs help.",
+          focus: "Simplify environment.",
+          steps: ["Clear surfaces", "Remove distractions", "Quiet work"],
+          done: "Space feels calmer = stop.",
+          swap: "Step away."
+        }
+      ],
+
+      win: [
+        {
+          reminder: "Wins build momentum.",
+          focus: "Finish something.",
+          steps: ["Short task", "Finish together", "Celebrate"],
+          done: "One finish = win.",
+          swap: "Choose fun instead."
+        },
+        {
+          reminder: "Small wins count.",
+          focus: "Confidence boost.",
+          steps: ["Easy task", "Praise effort", "End early"],
+          done: "Confidence lifts = stop.",
+          swap: "Switch activity."
+        },
+        {
+          reminder: "Wins don’t have to be academic.",
+          focus: "Shared joy.",
+          steps: ["Cook", "Read", "Laugh"],
+          done: "Connection happens = enough.",
+          swap: "Rest together."
+        },
+        {
+          reminder: "Morale matters.",
+          focus: "Encouragement.",
+          steps: ["Compliment effort", "Favourite subject", "High-note ending"],
+          done: "Mood improves = done.",
+          swap: "Try again tomorrow."
+        },
+        {
+          reminder: "Completion resets perspective.",
+          focus: "Finish something small.",
+          steps: ["Clear end", "Immediate closure", "Stop"],
+          done: "Completion felt = enough.",
+          swap: "Simplify further."
+        }
+      ],
+
+      house: [
+        {
+          reminder: "Environment affects everything.",
+          focus: "Reset one space.",
+          steps: ["One room", "One surface", "One bin"],
+          done: "Space feels lighter = stop.",
+          swap: "Choose a drawer."
+        },
+        {
+          reminder: "Order supports calm.",
+          focus: "Basic reset.",
+          steps: ["Dishes", "Laundry", "Clear table"],
+          done: "Basics done = enough.",
+          swap: "Do just one."
+        },
+        {
+          reminder: "Perfection isn’t needed.",
+          focus: "Contain mess.",
+          steps: ["Put away loose items", "Close doors", "Light tidy"],
+          done: "Chaos contained = stop.",
+          swap: "Pause."
+        },
+        {
+          reminder: "A calmer house helps learning.",
+          focus: "Prep for tomorrow.",
+          steps: ["Tidy school area", "Prep materials", "Stop early"],
+          done: "Tomorrow feels easier = enough.",
+          swap: "Skip prep."
+        },
+        {
+          reminder: "Resetting space resets minds.",
+          focus: "Lighten environment.",
+          steps: ["Open windows", "Remove clutter", "Add comfort"],
+          done: "Calm returns = stop.",
+          swap: "Slow it down."
+        }
+      ]
+    };
+
+    const cycle = {};
+    let lastType = null;
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
     }
 
-    bindEnter(t2, b2);
-    bindEnter(t3, b3);
-    bindEnter(t4, b4);
+    function nextPack(type) {
+      if (!cycle[type] || cycle[type].length === 0) {
+        cycle[type] = shuffle([...Array(packs[type].length).keys()]);
+      }
+      return packs[type][cycle[type].shift()];
+    }
 
-    // Optional: If you want to require at least 2 characters before continuing,
-    // uncomment the check below in each click handler.
-    // (I kept it gentle and permissive by default.)
+    function renderPack(type) {
+      const p = nextPack(type);
+      lastType = type;
+
+      document.getElementById('outReminder').textContent = p.reminder;
+      document.getElementById('outFocus').textContent = p.focus;
+      document.getElementById('outDone').textContent = p.done;
+      document.getElementById('outSwap').textContent = p.swap;
+
+      const ul = document.getElementById('outSteps');
+      ul.innerHTML = "";
+      p.steps.forEach(s => {
+        const li = document.createElement('li');
+        li.textContent = s;
+        ul.appendChild(li);
+      });
+
+      const out = document.getElementById('output');
+      out.style.display = 'block';
+      out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    document.getElementById('choices').addEventListener('click', e => {
+      const btn = e.target.closest('button[data-type]');
+      if (!btn) return;
+      renderPack(btn.dataset.type);
+    });
+
+    document.getElementById('tryAnother').addEventListener('click', () => {
+      if (lastType) renderPack(lastType);
+    });
   </script>
 </body>
 </html>
-
